@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Performance Boost
+Comment=Drop caches, trim logs, free RAM
+Exec=~/bin/vibewm-boost
+Icon=system-run
+Terminal=false
+Categories=Utility;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=VNC Remote
+Comment=Start/stop VNC server for remote access
+Exec=~/bin/vibewm-vnc
+Icon=preferences-desktop-remote-desktop
+Terminal=false
+Categories=Utility;

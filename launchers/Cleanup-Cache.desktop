@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Cleanup Cache
+Comment=Clear browser & system caches
+Exec=~/bin/vibewm-cleanup
+Icon=edit-clear
+Terminal=false
+Categories=Utility;

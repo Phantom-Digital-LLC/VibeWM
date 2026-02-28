@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════
+# VibeWM v3.0 — Toggle Screen Recording
+# MP4, ~5MB/min, H.264 ultrafast, 15fps
+# Usage: ~/bin/vibewm-toggle (bind to Super+Shift+V)
+# ═══════════════════════════════════════════════════════════
+set -euo pipefail
+
+PIDFILE="/tmp/vibewm-record.pid"
+OUTDIR="$HOME/Videos"
+mkdir -p "$OUTDIR"
+
+if [[ -f "$PIDFILE" ]]; then
+    PID=$(cat "$PIDFILE")
+    if kill -0 "$PID" 2>/dev/null; then
+        kill "$PID"
+        sleep 0.5
+        # Ensure ffmpeg exits cleanly
+        kill -9 "$PID" 2>/dev/null || true
+    fi
+    rm -f "$PIDFILE"
+    notify-send "⏹ Recording Stopped" "Saved to $OUTDIR/" -i media-record
+else
+    OUTFILE="$OUTDIR/vibewm-$(date +%Y%m%d-%H%M%S).mp4"
+    RES=$(xdpyinfo 2>/dev/null | awk '/dimensions/{print $2}' || echo "1366x768")
+    ffmpeg -y -video_size "$RES" -framerate 15 -f x11grab -i "${DISPLAY:-:0}" \
+        -c:v libx264 -preset ultrafast -crf 28 -pix_fmt yuv420p \
+        "$OUTFILE" > /dev/null 2>&1 &
+    echo $! > "$PIDFILE"
+    notify-send "⏺ Recording Started" "$(basename "$OUTFILE")" -i media-record
+fi

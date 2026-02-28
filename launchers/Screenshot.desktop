@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot
+Comment=Annotate & copy screenshot (Flameshot)
+Exec=flameshot gui
+Icon=accessories-screenshot
+Terminal=false
+Categories=Utility;

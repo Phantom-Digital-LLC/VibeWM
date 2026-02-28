@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Record Video
+Comment=Toggle MP4 screen recording
+Exec=~/bin/vibewm-toggle
+Icon=media-record
+Terminal=false
+Categories=Utility;
